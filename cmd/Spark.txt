@@ -1,0 +1,44 @@
+﻿Go to location of spark 
+Cmd- Spark-shell
+
+
+
+
+5. Check spark jobs using following url in browser
+http://localhost:4040/jobs/
+
+
+Create an RDD using a parallelized collection.
+scala> val data = sc.parallelize(List(10,20,30))
+
+
+scala> data.collect
+
+
+scala> val mapfunc = data.map(x => x+10)
+
+
+scala> mapfunc.collect
+
+
+
+
+Let's create an RDD by using the following command.
+4. val data=sc.textFile("data_for_spark_practical.txt")
+
+
+5. Splitting data:
+>val splitdata = data.flatMap(line => line.split(" "));
+> splitdata.collect;
+
+
+
+
+6. Now, we are going to map data or keys with value 1
+>val mapdata = splitdata.map(word => (word,1));
+>mapdata.collect;
+
+
+7. Now, we are going to reduce data.
+>val reducedata = mapdata.reduceByKey(_+_);
+>reducedata.collect;

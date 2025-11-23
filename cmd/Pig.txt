@@ -1,0 +1,93 @@
+﻿pig -x mapreduce or pig -x local
+
+
+
+
+
+
+Create a directory in hdfs and put the file into it
+
+
+001,ABC,PQRS,9422980768,Delhi
+002,LMN,LMNO,9422980745,Mumbai
+003,XYZ,XYZA,9422980754,Chennai
+004,DEF,DEFG,9422980744,Delhi
+005,GHI,GHIJ,9422980719,Pune
+
+
+
+
+student = LOAD 'hdfs://localhost:9000/pig/data_for_pig.txt' USING PigStorage(',') as
+(id:int,fname:chararray,lname:chararray,phone:chararray,city:chararray);
+
+
+city = LOAD 'hdfs://localhost:9000/pig/data_for_pig_new.txt' USING PigStorage(',') as
+(city:chararray, population:chararray);
+
+
+foreach
+for_each_stud1 = foreach student generate id, fname, city;
+dump for_each_stud1;
+
+
+Filter
+filter_command = filter student by id>004;
+dump filter_command;
+
+
+Join
+join_command = join student by city, city by city;
+dump join_command;
+
+
+order by
+order_command_asc = order student by city asc;
+dump order_command_asc;
+
+
+order_command_desc = order student by city desc;
+dump order_command_desc;
+
+
+Distinct [ to get o/p, you require to should have duplicate data in your file]
+distinct_command = distinct student;
+dump distinct_command;
+
+
+Store
+store order_command_desc into '/desc';
+
+
+output:
+Input(s):
+Successfully read 5 records (1360 bytes) from: "hdfs://localhost:9000/pig/data_for_pig.txt"
+
+
+Output(s):
+Successfully stored 5 records in: "/desc"
+
+
+Group command (Duplication is city is required)
+group_command = group student by city;
+dump group_command;
+
+
+Cogroup
+co_group_command = cogroup student by city, city by city;
+dump co_group_command;
+
+
+Cross:
+cross_command = cross student, city;
+dump cross_command;
+
+
+Limit:
+limit_command = limit student 3;
+dump limit_command;
+
+
+Split:
+split student into x if id >2, y if id >3;
+dump x;
+dump y;

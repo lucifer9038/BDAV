@@ -1,0 +1,47 @@
+﻿http://localhost:9870/
+
+
+http://localhost:8088/cluster
+
+
+
+
+
+
+Mkdir
+        hdfs dfs –mkdir /demo
+
+
+Ls
+        hdfs dfs -ls /path
+
+
+Put
+        hdfs dfs -put "E:\hadoop-3.3.0\data.txt" /demo
+
+
+copyFromLocal
+        hdfs dfs -copyFromLocal "E:\hadoop-3.3.0\data.txt" /demo
+
+
+Get
+        hadoop dfs -get "E:\hadoop-3.3.0\data.txt" /demo
+
+
+copyToLocal
+
+
+        hdfs dfs -copyToLocal "E:\hadoop-3.3.0\data.txt" /demo
+
+
+Cat
+        hdfs dfs –cat “/demo/data.txt”
+
+
+Mv
+        hdfs dfs –mkdir /bigdemo
+hdfs dfs -mv /demo /bigdemo
+
+
+Cp
+        hdfs dfs -cp /BigDemo/demo/data.txt /Bigdemo/datafalir
